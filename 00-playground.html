@@ -1,0 +1,42 @@
+<body style="background-color: gray">
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+  <script src="https://unpkg.com/lodash.throttle@4.1.1/index.js"></script>
+  <script type="text/babel">
+    const UNICODE_STAR = "&#9733;";
+
+    function Star({ id, active = false }) {
+      return (
+        <span
+          data-id={id}
+          style={{ color: active ? "black" : "white", fontSize: 48 }}
+          dangerouslySetInnerHTML={{ __html: UNICODE_STAR }}
+        />
+      );
+    }
+
+    const element = (
+      <div
+        onClick={(e) => {
+          console.log(e.target.getAttribute("data-id"));
+        }}
+        style={{
+          display: "grid",
+          width: "300px",
+          gridAutoFlow: "column",
+        }}
+        onMouseMove={(e) => {
+          // e.clientX
+        }}
+      >
+        {Array.from(Array(5), (_, i) => (
+          <Star key={i + 1} id={i + 1} />
+        ))}
+      </div>
+    );
+
+    ReactDOM.render(element, document.getElementById("root"));
+  </script>
+</body>
